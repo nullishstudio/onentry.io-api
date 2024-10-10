@@ -14,7 +14,38 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id             String       @id @default(cuid())
+  wallet_address String       @unique
+  fullname       String
+  username       String       @unique
+  bio            String?
+  avatarUrl      String?
+  avatar         Avatar[]
+  social         Social[]
+  extraLinks     ExtraLinks[]
+}
+
+model Avatar {
+  id        String @id @default(cuid())
+  avatarUrl String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Social {
+  id       String  @id @default(cuid())
+  name     String?
+  username String
+  url      String
+  user     User    @relation(fields: [userId], references: [id])
+  userId   String
+}
+
+model ExtraLinks {
+  id          String @id @default(cuid())
+  url         String
+  title       String
+  description String
+  user        User   @relation(fields: [userId], references: [id])
+  userId      String
 }
