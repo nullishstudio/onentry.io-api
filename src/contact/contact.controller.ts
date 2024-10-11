@@ -1,10 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { User } from '@prisma/client';
 import { CreateContactDto, UpdateContactDto } from './dto/contact.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/contact')
+@UseGuards(AuthGuard('jwt'))
 export class ContactController {
   constructor(private contact: ContactService) {}
 
