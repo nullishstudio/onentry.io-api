@@ -12,6 +12,13 @@ export class AuthController {
     return await this.authService.createNewAccount(wallet_address);
   }
 
+  @Post('wallet/login')
+  async loginWithWallet(
+    @Body() { wallet_address }: { wallet_address: string },
+  ) {
+    return await this.authService.loginWithWallet(wallet_address);
+  }
+
   @Get('wallet/verify')
   async verifyWalletAddress(
     @Body() { wallet_address }: { wallet_address: string },
