@@ -17,6 +17,8 @@ model User {
   avatar         Avatar[]
   extraLinks     ExtraLinks[]
   social         Social[]
+  email          String?
+  phone          String?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   contact        Contact[]
