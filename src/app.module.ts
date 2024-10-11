@@ -8,9 +8,10 @@ import { UserModule } from './user/user.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { AvatarModule } from './avatar/avatar.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
+import { ContactModule } from './contact/contact.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, AuthModule, UserModule, CloudinaryModule, AvatarModule, PortfolioModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, AuthModule, UserModule, CloudinaryModule, AvatarModule, PortfolioModule, ContactModule],
   controllers: [AppController],
   providers: [AppService],
 })
