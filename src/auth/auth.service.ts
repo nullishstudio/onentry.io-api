@@ -1,7 +1,8 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class AuthService {
@@ -10,6 +11,37 @@ export class AuthService {
     private jwt: JwtService,
     private config: ConfigService,
   ) {}
+
+  async loginWithWallet(wallet_address: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        wallet_address,
+      },
+      include: {
+        avatar: true,
+        extraLinks: true,
+        social: true,
+      },
+    });
+    const token = await this.jwt.signAsync(
+      {
+        wallet_address,
+        id: user?.id,
+      },
+      {
+        expiresIn: '72h',
+        secret: this.config.get('JWT_SECRET'),
+      },
+    );
+
+    return {
+      data: {
+        ...user,
+        token,
+      },
+      message: 'Login was successful',
+    };
+  }
 
   async createNewAccount(wallet_address: string) {
     try {
@@ -40,7 +72,10 @@ export class AuthService {
         message: 'Creator created successfully',
       };
     } catch (error) {
-      throw error;
+      let errorMsg = '';
+      if (error instanceof PrismaClientKnownRequestError)
+        errorMsg = 'Account already exist';
+      throw new HttpException(errorMsg, HttpStatus.EXPECTATION_FAILED);
     }
   }
 
