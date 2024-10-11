@@ -19,6 +19,7 @@ model User {
   social         Social[]
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+  contact        Contact[]
 }
 
 model Avatar {
@@ -50,4 +51,12 @@ model ExtraLinks {
   user        User     @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Contact {
+  id     String @id @default(cuid())
+  label  String
+  value  String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
