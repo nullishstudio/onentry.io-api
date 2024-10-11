@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('api/auth')
@@ -19,10 +19,8 @@ export class AuthController {
     return await this.authService.loginWithWallet(wallet_address);
   }
 
-  @Get('wallet/verify')
-  async verifyWalletAddress(
-    @Body() { wallet_address }: { wallet_address: string },
-  ) {
+  @Get('wallet/verify/:wallet_address')
+  async verifyWalletAddress(@Param('wallet_address') wallet_address: string) {
     return await this.authService.verifyWalletAddress(wallet_address);
   }
 }
