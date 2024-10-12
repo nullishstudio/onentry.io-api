@@ -29,7 +29,7 @@ export class AuthService {
         id: user?.id,
       },
       {
-        expiresIn: '72h',
+        expiresIn: '96h',
         secret: this.config.get('JWT_SECRET'),
       },
     );
