@@ -13,7 +13,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AvatarService } from './avatar.service';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
-import { UpdateAvatarDto } from './dto/avatar.dto';
+import { BaseAvatarUrl, UpdateAvatarDto } from './dto/avatar.dto';
 import { User } from '@prisma/client';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -35,7 +35,6 @@ export class AvatarController {
     @GetUser() { id }: User,
     @Body() { avatarId }: UpdateAvatarDto,
   ) {
-    console.log(avatarId);
     return await this.avatar.setAvatar(id, avatarId);
   }
 
@@ -51,5 +50,13 @@ export class AvatarController {
     } catch (error) {
       throw new HttpException('Unable to upload image', error);
     }
+  }
+
+  @Post('base')
+  async saveBaseAvatar(
+    @GetUser() { id }: User,
+    @Body() baseAvatarUrl: BaseAvatarUrl,
+  ) {
+    return await this.avatar.saveBaseAvatar(id, baseAvatarUrl);
   }
 }

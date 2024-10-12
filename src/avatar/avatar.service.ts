@@ -1,5 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { BaseAvatarUrl } from './dto/avatar.dto';
 
 @Injectable()
 export class AvatarService {
@@ -33,6 +34,21 @@ export class AvatarService {
     const userAvatar = await this.prisma.avatar.create({
       data: {
         avatarUrl: secure_url,
+        userId: id,
+      },
+    });
+
+    return {
+      data: { ...userAvatar },
+      statusCode: HttpStatus.CREATED,
+      message: 'Avatar uploaded succesfully',
+    };
+  }
+
+  async saveBaseAvatar(id: string, { baseAvatarUrl }: BaseAvatarUrl) {
+    const userAvatar = await this.prisma.avatar.create({
+      data: {
+        avatarUrl: baseAvatarUrl,
         userId: id,
       },
     });

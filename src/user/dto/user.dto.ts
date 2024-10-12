@@ -62,4 +62,8 @@ export class UpdateUserDto {
   @IsString()
   @IsOptional()
   discord?: string;
+
+  @IsString()
+  @IsOptional()
+  avatarUrl?: string;
 }

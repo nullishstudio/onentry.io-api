@@ -5,3 +5,8 @@ export class UpdateAvatarDto {
   @IsOptional()
   avatarId?: string;
 }
+
+export class BaseAvatarUrl {
+  @IsString()
+  baseAvatarUrl: string;
+}
