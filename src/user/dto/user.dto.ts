@@ -34,4 +34,32 @@ export class UpdateUserDto {
   @IsString()
   @IsOptional()
   phone?: string;
+
+  @IsString()
+  @IsOptional()
+  url?: string;
+
+  @IsString()
+  @IsOptional()
+  github?: string;
+
+  @IsString()
+  @IsOptional()
+  twitter?: string;
+
+  @IsString()
+  @IsOptional()
+  farcaster?: string;
+
+  @IsString()
+  @IsOptional()
+  lens?: string;
+
+  @IsString()
+  @IsOptional()
+  telegram?: string;
+
+  @IsString()
+  @IsOptional()
+  discord?: string;
 }

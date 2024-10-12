@@ -18,6 +18,13 @@ model User {
   extraLinks     ExtraLinks[]
   social         Social[]
   email          String?
+  url            String?
+  github         String?
+  twitter        String?
+  farcaster      String?
+  lens           String?
+  telegram       String?
+  discord        String?
   phone          String?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
