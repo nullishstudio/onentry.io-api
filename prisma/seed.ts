@@ -34,7 +34,7 @@ async function main() {
       {
         avatarUrl: 'https://example.com/avatar1.jpg',
         userId: (
-          await prisma.user.findUnique({
+          await prisma.user.findFirst({
             where: { wallet_address: 'wallet_1' },
           })
         ).id,
@@ -42,7 +42,7 @@ async function main() {
       {
         avatarUrl: 'https://example.com/avatar2.jpg',
         userId: (
-          await prisma.user.findUnique({
+          await prisma.user.findFirst({
             where: { wallet_address: 'wallet_2' },
           })
         ).id,
@@ -50,7 +50,7 @@ async function main() {
       {
         avatarUrl: 'https://example.com/avatar3.jpg',
         userId: (
-          await prisma.user.findUnique({
+          await prisma.user.findFirst({
             where: { wallet_address: 'wallet_3' },
           })
         ).id,
@@ -65,7 +65,7 @@ async function main() {
         username: 'veri5ied_twitter',
         url: 'https://twitter.com/veri5ied',
         userId: (
-          await prisma.user.findUnique({
+          await prisma.user.findFirst({
             where: { wallet_address: 'wallet_1' },
           })
         ).id,
@@ -75,7 +75,7 @@ async function main() {
         username: 'johndoe_linkedin',
         url: 'https://linkedin.com/in/johndoe',
         userId: (
-          await prisma.user.findUnique({
+          await prisma.user.findFirst({
             where: { wallet_address: 'wallet_2' },
           })
         ).id,
@@ -90,7 +90,7 @@ async function main() {
         title: 'Veri5ied Portfolio',
         description: 'Personal portfolio of Veri5ied.',
         userId: (
-          await prisma.user.findUnique({
+          await prisma.user.findFirst({
             where: { wallet_address: 'wallet_1' },
           })
         ).id,
@@ -100,7 +100,7 @@ async function main() {
         title: 'John Doe Portfolio',
         description: 'Personal portfolio of John Doe.',
         userId: (
-          await prisma.user.findUnique({
+          await prisma.user.findFirst({
             where: { wallet_address: 'wallet_2' },
           })
         ).id,
