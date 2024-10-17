@@ -80,7 +80,7 @@ export class AuthService {
   }
 
   async verifyWalletAddress(wallet_address: string) {
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.user.findFirst({
       where: {
         wallet_address,
       },
