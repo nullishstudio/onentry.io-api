@@ -44,12 +44,13 @@ export class AuthService {
   }
 
   async createNewAccount(wallet_address: string) {
+    const tempUsername = `user_${wallet_address.substring(0, 8)}`;
     try {
       const newUser = await this.prisma.user.create({
         data: {
           wallet_address,
           fullname: '',
-          username: '',
+          username: tempUsername,
         },
       });
 
